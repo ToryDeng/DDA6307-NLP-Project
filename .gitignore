@@ -1,0 +1,17 @@
+# Ignore everything in the Geneformer/ folder and its subdirectories
+Geneformer/*
+
+# Except for Python (.py) files in Geneformer/ and its subdirectories
+!Geneformer/geneformer
+Geneformer/geneformer/*.pkl
+
+
+Project/ckpt/**
+Project/datasets/**
+Project/models/**
+Project/__pycache__/*
+Project/Geneformer/wandb/*
+Project/Geneformer/*.ipynb
+Project/Geneformer/*.txt
+Project/scGPT/__pycache__/*
+Project/*.md
