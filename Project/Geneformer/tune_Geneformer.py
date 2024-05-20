@@ -1,7 +1,10 @@
 import argparse, sys, datetime, glob, os, gc, json, warnings
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 sys.path.insert(0, "/home/dengtao/nlp-course/Geneformer")
 warnings.filterwarnings("ignore")
+
+import torch
 from geneformer import Classifier
 
 
@@ -63,10 +66,6 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-# configure the number of available GPUs before importing torch
-if args.hyperopt_trials == 0:  # run rays' trials in parallel when args.hyperopt_trials > 0
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-import torch
 
 # get time stamps
 current_datetime = datetime.datetime.now()

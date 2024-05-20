@@ -182,6 +182,8 @@ def load_model(
                 model = _load_model(model_type, num_classes, model_directory, True, torch_dtype=torch.bfloat16)
             model = PeftModel.from_pretrained(model, model_directory)
             model = model.merge_and_unload()
+        else:
+            model = _load_model(model_type, num_classes, model_directory, True, torch_dtype=torch.float32)
         model.to("cuda")
         model.eval()
     elif mode == "train":
@@ -207,11 +209,24 @@ def load_model(
             model.print_trainable_parameters()
         else:
             model = _load_model(model_type, num_classes, model_directory, False, torch_dtype=torch.float32)
+            print_trainable_parameters(model)
             model.to("cuda")
     else:
         raise ValueError("`mode` can only be 'eval' or 'train'.")
 
     return model
+
+
+def print_trainable_parameters(model):
+    trainable_params = 0
+    all_param = 0
+    for _, param in model.named_parameters():
+        all_param += param.numel()
+        if param.requires_grad:
+            trainable_params += param.numel()
+    print(
+        f"trainable params: {trainable_params} || all params: {all_param} || trainable%: {100 * trainable_params / all_param:.2f}"
+    )
 
 
 def quant_layers(model):
