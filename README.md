@@ -23,15 +23,24 @@ Similar to datasets, to ensure you can successfully run the code, make a new fol
 - `Geneformer_12layers/`
 - `scGPT_human/`
 
+
+## Requirements
+First of all, you should create a conda environment from the yml file and activate it:
+
+```bash
+conda env create -f environment.yml
+conda activate glm
+```
+Then you need to install [`wandb`](https://pypi.org/project/wandb/) and log into W&B first. See the [quick start](https://docs.wandb.ai/quickstart) guide. You also need to modify [one line of code](./Project/Geneformer/tune_Geneformer.py#L4) to add the `Geneformer/` path to system paths.
+
+
 ## Reproducibility experiments
-Before reproducing all results of Geneformer in the report, you may need to install [`wandb`](https://pypi.org/project/wandb/) and log into W&B first. See the [quick start](https://docs.wandb.ai/quickstart) guide. You also need to modify [one line of code](./Project/Geneformer/tune_Geneformer.py#L4) to add the `Geneformer/` path to system paths. Then:
+To reproduce all results of Geneformer in the report:
 
 ```bash
 cd ./Project/Geneformer/
 bash run.sh
 ```
-
-
 
 Although the report doesn'y include, the original results shown in the [scGPT tutorial](https://scgpt.readthedocs.io/en/latest/tutorial_annotation.html) can be reproduced by
 
